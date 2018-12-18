@@ -20,16 +20,16 @@ BSTNode.prototype.search = function(target) {
   const difference = this.value - target;
 
   if (difference > 0 && this.left) {
-    this.left.search(target);
-  } else if (difference < 0 && this.right) {
-    this.right.search(target);
-  } else if (difference !== 0 && !this.left && !this.right) {
-    console.log('Value not found!');
-  } else {
-    console.log(this);
+    return this.left.search(target);
   }
+  if (difference < 0 && this.right) {
+    return this.right.search(target);
+  }
+
+  return this.value === target ? this : 'Value not found!';
 };
 
+// Example
 var newBST = new BSTNode(8);
 
 // Insertion
@@ -41,8 +41,9 @@ newBST.insertNode(6);
 newBST.insertNode(7);
 newBST.insertNode(4);
 newBST.insertNode(13);
+console.log(newBST);
 
 // Search
-newBST.search(10);
-newBST.search(7);
-newBST.search(0);
+console.log(newBST.search(10));
+console.log(newBST.search(7));
+console.log(newBST.search(0));

@@ -102,13 +102,19 @@ When it comes to `tree traversal` there are two options: **Depth-First Search (D
 
 The exmaple given is what is known as `pre-order` traversal, where the algorithm begins at the parent then searches the left and right child.
 
-`In-order` traversal is where the algorithm starts from the left child, then the parent followed by the right child, visually this looks like your are checking each node working from left to right, `'f'->'c'->'d'->'b'->'root'->'e'`.
+`In-order` traversal is where the algorithm starts from the left child, then the parent followed by the right child, visually this looks like your are checking each node working from left to right.
 
-`Post-order` traversal is where the algorithm starts with the left child, then the right, followed by the parent, again, visually this looks something like we are working from left to right but always starting at the lowest part of the tree, `'f'->'d'->'c'->'b'->'e'->'root'`.
+- `'f'->'c'->'d'->'b'->'root'->'e'`
+
+`Post-order` traversal is where the algorithm starts with the left child, then the right, followed by the parent, again, visually this looks something like we are working from left to right but always starting at the lowest part of the tree.
+
+- `'f'->'d'->'c'->'b'->'e'->'root'`
 
 For some more advanced examples check [this](https://www.cs.cmu.edu/~adamchik/15-121/lectures/Trees/trees.html) out.
 
-**Breadth-First Search (BFS):** Traverses the tree level by level and depth by depth starting at the root node. The children of the parent are then checked (moving from left to right), once they have been checked the algorithm moves one level down until all nodes have been checked or a stopping condition has been met. In our example from before this would look like, `'root'->'b'->'e'->'c'->'f'->'d'`
+**Breadth-First Search (BFS):** Traverses the tree level by level and depth by depth starting at the root node. The children of the parent are then checked (moving from left to right), once they have been checked the algorithm moves one level down until all nodes have been checked or a stopping condition has been met. In our example from before this would look like:
+
+- `'root'->'b'->'e'->'c'->'f'->'d'`
 
 ![fig4](/Trees/images/fig4.png)
 
@@ -182,14 +188,14 @@ BSTNode.prototype.search = function(target) {
   const difference = this.value - target;
 
   if (difference > 0 && this.left) {
-    this.left.search(target);
-  } else if (difference < 0 && this.right) {
-    this.right.search(target);
-  } else if (difference !== 0 && !this.left && !this.right) {
-    console.log('Value not found!');
-  } else {
-    console.log(this);
+    return this.left.search(target);
   }
+
+  if (difference < 0 && this.right) {
+    return this.right.search(target);
+  }
+
+  return this.value === target ? this : 'Value not found!';
 };
 
 var newBST = new BSTNode(8);
@@ -219,11 +225,13 @@ newBST.search(0);
 
 ### Deletion
 
-Deletion has two different cases that need to be considered; the first case is if we delete a node below the root, the second case being that we intend to delete the root itself. In the former we must reattch the nodes which would otherwise be seperated after the node is removed, fairly straightforward.
+Deletion has three different cases that need to be considered; the first case is **deleting a node with no children**, this is the simplest case and only requires us to delete the node of interest.
+
+The second case is **deleting a node with only one children**, in this case we must reattch the child node which would otherwise be seperated after the node is removed.
 
 ![fig6](/Trees/images/fig6.png)
 
-In the latter case we must replace the root with a node that has a value greater than the `leftNode` and less than the `rightNode` of the `rootNode`. That node must be "added" into the place of the `rootNode` after it has been removed, then deleted (such that the `childNodes` of the swapped node remain attached to the tree).
+The final case is **deleting a node with two children**, in this case you must replace the deleted node with with a node that has a value greater than the `leftNode` and less than the `rightNode` of the deleted node (or the minimum value available).
 
 ![fig7](/Trees/images/fig7.png)
 
