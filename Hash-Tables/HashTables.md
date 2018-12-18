@@ -45,6 +45,94 @@ Although the previous example is not necessarily a bad thing, we can certainly d
 
 ![fig3](/Hash-Tables/images/fig3.png)
 
+### Collision Resolution - Open Hashing
+
+As we saw in our previous example where our hashing function resulted in multiple collisions we ended up with multiple values that shared the same index. While this is not ideal it should be possible, handling collisions is important in hash table design.
+
+To handle such events we can employ the commonly used technique of `open hashing`. In seperate chaining each element of the hash table is a linked list. If there is a collision the value is simply added to the linked list corresponding to the index. To retrieve the value from the linked list the list must be traveresed until the entrey corresponding to the value is found.
+
+![fig4](/Hash-Tables/images/fig4.png)
+
+```js
+function HashTable(maxValues) {
+  this.table = {};
+  this.maxValues = maxValues;
+  this.totalValues = 0;
+}
+
+HashTable.prototype.addValue = function(value) {
+  var hash = this._simpleHashFunction(value);
+
+  if (this.table[hash] === undefined) {
+    var linkedList = new _SingleLL();
+    linkedList._addNodeToLL(value);
+    this.table[hash] = linkedList;
+  } else {
+    this.table[hash]._addNodeToLL(value);
+  }
+
+  this.totalValue++;
+};
+
+HashTable.prototype._simpleHashFunction = function(string) {
+  var sum = string.split('').reduce((acc, curr, idx) => {
+    return (acc += curr.charCodeAt(0) * idx);
+  }, 0);
+
+  return sum % 111;
+};
+
+function _Node(value) {
+  this.value = value;
+  this.next = null;
+}
+
+function _SingleLL() {
+  this.head = null;
+  this.tail = null;
+  this.length = 0;
+}
+
+_SingleLL.prototype._addNodeToLL = function(value) {
+  var node = new _Node(value);
+
+  if (!this.head) {
+    this.head = node;
+    this.tail = node;
+  } else {
+    this.tail.next = node;
+    this.tail = node;
+  }
+
+  this.length++;
+};
+
+var newHashTable = new HashTable();
+
+newHashTable.addValue('abcdef');
+newHashTable.addValue('sdsafa');
+newHashTable.addValue('aaaaaaa');
+
+console.log(newHashTable.table);
+
+// { '39':
+//    _SingleLL {
+//      head: _Node { value: 'aaaaaaa', next: null },
+//      tail: _Node { value: 'aaaaaaa', next: null },
+//      length: 1 },
+//   '67':
+//    _SingleLL {
+//      head: _Node { value: 'abcdef', next: null },
+//      tail: _Node { value: 'abcdef', next: null },
+//      length: 1 },
+//   '71':
+//    _SingleLL {
+//      head: _Node { value: 'sdsafa', next: null },
+//      tail: _Node { value: 'sdsafa', next: null },
+//      length: 1 } }
+```
+
 ## References
 
 - [Basics of Hash Tables](https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/tutorial/)
+- [About the #data-structures series](http://blog.benoitvallon.com/data-structures-in-javascript/the-hash-table-data-structure/)
