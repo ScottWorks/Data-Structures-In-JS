@@ -8,6 +8,9 @@ More to come later, but this is a sandbox for playing around with different conc
 
 #### [Trees](/Trees/Trees.md)
 
-## To-do List
-
 - [ ] Add DFS and BFS prototype methods
+- [ ] Add removeNode prototype method
+
+#### [Hash Tables](/Hash-Tables/HashTables.md)
+
+- [ ] Add coding examples

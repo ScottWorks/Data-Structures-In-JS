@@ -6,15 +6,15 @@ A tree is a collection of `nodes`, connected by `edges`. Each node consists of a
 
 ![fig1](/Trees/images/fig1.jpg)
 
-## Binary Tree
-
 ### Time Complexity
 
-#### Worst-Case
+#### Average
 
-| Access | Search | Insertion | Insertion |
-| :----: | :----: | :-------: | :-------: |
-|  O(n)  |  O(n)  |   O(n)    |   O(n)    |
+|  Access   |  Search   | Insertion | Insertion |
+| :-------: | :-------: | :-------: | :-------: |
+| O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) |
+
+## Binary Tree
 
 A `Binary Tree` is a data structure where each node has at most two children, referred to as the `left child` and `right child`, which are initialized with `null` values. The Binary Tree is unordered, data is added
 
