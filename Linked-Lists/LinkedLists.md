@@ -49,9 +49,31 @@ SinglyLinkedList.prototype.add = function(data) {
   }
   this.numberOfValues++;
 };
+
+SinglyLinkedList.prototype.insertAfter = function(data, toNodeData) {
+  var current = this.head;
+
+  while (current) {
+    if (current.data === toNodeData) {
+      var toNode = new Node(data);
+
+      if (current === this.tail) {
+        this.tail.next = toNode;
+        this.tail = null;
+      } else {
+        toNode.next = current.next;
+        current.next = toNode;
+      }
+
+      this.index++;
+    }
+
+    current = current.next;
+  }
+};
 ```
 
-### Traversal
+### Removal
 
 ```js
 SinglyLinkedList.prototype.remove = function(data) {
@@ -80,29 +102,11 @@ SinglyLinkedList.prototype.remove = function(data) {
     current = current.next;
   }
 };
+```
 
-SinglyLinkedList.prototype.insertAfter = function(data, toNodeData) {
-  var current = this.head;
+### Misc.
 
-  while (current) {
-    if (current.data === toNodeData) {
-      var toNode = new Node(data);
-
-      if (current === this.tail) {
-        this.tail.next = toNode;
-        this.tail = null;
-      } else {
-        toNode.next = current.next;
-        current.next = toNode;
-      }
-
-      this.index++;
-    }
-
-    current = current.next;
-  }
-};
-
+```js
 SinglyLinkedList.prototype.mutateEach = function(fn) {
   var current = this.head;
 
