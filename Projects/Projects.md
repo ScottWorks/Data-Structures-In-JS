@@ -1,1 +1,3 @@
 Project specifications and requirements coming soon...
+
+[Programming Projects Index](https://www.cs.colorado.edu/~main/projects/)

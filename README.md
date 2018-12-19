@@ -1,6 +1,6 @@
 ## Motivation
 
-In this series I will explore several different data structures that are fundamental to Computer Science. In each section I have provided detailed explainations about each data structure as well as a coding implementation in JavaScript.
+In this series I will explore several different data structures that are fundamental to Computer Science. In each section I have provided detailed explanations about each data structure as well as a coding implementation in JavaScript.
 
 ## Table of Contents
 

@@ -36,7 +36,8 @@ SinglyLinkedList.prototype.remove = function(data) {
         this.tail = previous;
       }
 
-      // Overwrites previous.next with the node that comes after the node containing the data.
+      /* Overwrites previous.next with the node 
+      that comes after the node containing the data.*/
       // HEAD -> 0 -> 3 -> [-1] -> 9 -> NULL
       // Node 3 points to Node 9
 
