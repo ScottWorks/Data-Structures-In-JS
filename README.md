@@ -1,10 +1,10 @@
 ## Motivation
 
-More to come later, but this is a sandbox for playing around with different concepts related to Data Structures.
+In this series I will explore several different data structures that are fundamental to Computer Science. In each section I have provided detailed explainations about each data structure as well as a coding implementation in JavaScript.
 
 ## Table of Contents
 
-#### Arrays
+#### TBD - [Arrays](/Arrays/Arrays.md)
 
 #### [Linked Lists](/Linked-Lists/LinkedLists.md)
 
@@ -18,3 +18,5 @@ More to come later, but this is a sandbox for playing around with different conc
 - Add removeNode prototype method
 
 #### [Hash Tables](/Hash-Tables/HashTables.md)
+
+#### TBD - [Projects](/Projects/Projects.md)
