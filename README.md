@@ -22,12 +22,12 @@ In this series I will explore several different data structures and algorithms t
 
 ### [Algorithms](/Algorithms/Algorithms.md)
 
-#### Bubble Sort
+#### [Bubble Sort](/Algorithms/Algorithms.md#Bubble-Sort)
 
-#### Quick Sort
+#### [Quick Sort](/Algorithms/Algorithms.md#Quick-Sort)
 
-#### Merge Sort
+#### [Merge Sort](/Algorithms/Algorithms.md#Merge-Sort)
 
-#### Binary Search
+#### [Binary Search](/Algorithms/Algorithms.md#Binary-Search)
 
 ### [Projects](/Projects/Projects.md)
