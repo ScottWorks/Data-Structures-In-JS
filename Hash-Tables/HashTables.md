@@ -1,10 +1,10 @@
-## Hash Tables
+# Hash Tables
 
 A `hash table` is a collection of key-value pairs, that provides efficient access.
 
-### Time Complexity
+## Time Complexity
 
-#### Average
+### Average
 
 | Access | Search | Insertion | Insertion |
 | :----: | :----: | :-------: | :-------: |
@@ -16,7 +16,7 @@ Lets say we wanted to hash some input data (i.e. Student DOB and Name), we would
 
 ![fig1](/Hash-Tables/images/fig1.png)
 
-### Hash Functions
+## Hash Functions
 
 With respect to hash tables, hash functions are any function that returns an index of fixed size. The requirements for a hash function are as follows:
 
@@ -28,7 +28,7 @@ With respect to hash tables, hash functions are any function that returns an ind
 
 Note: Irrespective of how good a hash function is, collisions are bound to occur. Therefore, to maintain the performance of a hash table, it is important to manage collisions through various collision resolution techniques.
 
-### Collisions
+## Collisions
 
 As mentioned collisions will occur, in some algorithms more often than others, this may not necessarily be major problem as long as we have some means of dealing with it. Take for example a hash function that creates an index based on the sum of the individual letter's ASCII values of the characters modulo.
 
@@ -45,7 +45,7 @@ Although the previous example is not necessarily a bad thing, we can certainly d
 
 ![fig3](/Hash-Tables/images/fig3.png)
 
-### Collision Resolution - Open Hashing
+## Collision Resolution - Open Hashing
 
 As we saw in our previous example where our hashing function resulted in multiple collisions we ended up with multiple values that shared the same index. While this is not ideal it should be possible, handling collisions is important in hash table design.
 

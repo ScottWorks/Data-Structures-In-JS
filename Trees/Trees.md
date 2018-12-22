@@ -1,4 +1,4 @@
-## Trees
+# Trees
 
 A tree is a collection of `nodes`, connected by `edges`. Each node consists of a data. The first node in a tree is called the `root` node. `Child nodes` are connected by an edge to `parent nodes`, nodes without children are call `leaf nodes`.
 
@@ -6,9 +6,9 @@ A tree is a collection of `nodes`, connected by `edges`. Each node consists of a
 
 ![fig1](/Trees/images/fig1.jpg)
 
-### Time Complexity
+## Time Complexity
 
-#### Average
+### Average
 
 |  Access   |  Search   | Insertion | Insertion |
 | :-------: | :-------: | :-------: | :-------: |

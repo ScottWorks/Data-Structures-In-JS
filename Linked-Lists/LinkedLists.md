@@ -1,8 +1,8 @@
-## Linked Lists
+# Linked Lists
 
 Linked lists are a A linear collection of data elements called nodes pointing to the next node via pointer. A collection of these nodes represents a sequence. The head points to the first node, and the last node (tail) points to NULL.
 
-### Arrays vs Linked Lists
+## Arrays vs Linked Lists
 
 Both linked lists and arrays act as a linear data store however there are some adavantages between the two data structures.
 
@@ -10,9 +10,9 @@ An array consumes contiguous memory locations that are allocated at compile time
 
 Linked lists are not as ridgid, memory is assigned as the list is modified. Elements can be inserted or removed from the beginning or end (assuming the tail is known) in constant time. While insertion and deletion are clearly a major advantage accessing that information occurs in a linear (O(n)) fashion,accessing any part of the list requires the program to sequentially traverse the list until the correct node is found.
 
-### Time Complexity
+## Time Complexity
 
-#### Average
+### Average
 
 | Access | Search | Insertion | Insertion |
 | :----: | :----: | :-------: | :-------: |
@@ -107,6 +107,20 @@ SinglyLinkedList.prototype.remove = function(data) {
 ### Misc.
 
 ```js
+SinglyLinkedList.prototype.find = function(data) {
+  var current = this.head;
+
+  while (current) {
+    if (current.data === data) {
+      return current;
+    }
+
+    current = current.next;
+  }
+
+  return 'No entires have been found';
+};
+
 SinglyLinkedList.prototype.mutateEach = function(fn) {
   var current = this.head;
 
@@ -139,6 +153,53 @@ SinglyLinkedList.prototype.print = function() {
 
   console.log(string);
 };
+```
+
+### Code Execution
+
+```js
+var newList = new SinglyLinkedList();
+
+newList.add(1);
+newList.add(-1);
+newList.add(1);
+newList.add(3);
+newList.add(5);
+newList.add(9);
+newList.print(); // [1]--->[-1]--->[1]--->[3]--->[5]--->[9]
+newList.length(); // 6
+
+newList.remove(5);
+newList.print(); // [1]--->[-1]--->[1]--->[3]--->[9]
+newList.length(); // 5
+
+newList.remove(1);
+newList.print(); // [-1]--->[3]--->[9]
+newList.length(); // 3
+
+newList.insert(7, 3);
+newList.print(); // [-1]--->[3]--->[7]--->[9]
+newList.length(); // 4
+
+newList.insert(1, 9);
+newList.print(); // [-1]--->[3]--->[7]--->[9]--->[1]
+newList.length(); // 5
+
+newList.insert(4, -1);
+newList.print(); // [-1]--->[4]--->[3]--->[7]--->[9]--->[1]
+newList.length(); // 6
+
+newList.mutateEach(function(node) {
+  node.data *= 2;
+});
+
+newList.print(); // [-2]--->[8]--->[6]--->[14]--->[18]--->[2]
+newList.length(); // 6
+
+console.log(newList.find(6));
+// Node {
+//   data: 6,
+//   next: Node { data: 14, next: Node { data: 18, next: [Node] } } }
 ```
 
 ## Double Linked Lists
