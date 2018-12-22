@@ -50,7 +50,7 @@ SinglyLinkedList.prototype.remove = function(data) {
   }
 };
 
-SinglyLinkedList.prototype.insertAfter = function(data, toNodeData) {
+SinglyLinkedList.prototype.insert = function(data, toNodeData) {
   var current = this.head;
 
   while (current) {
@@ -70,6 +70,20 @@ SinglyLinkedList.prototype.insertAfter = function(data, toNodeData) {
 
     current = current.next;
   }
+};
+
+SinglyLinkedList.prototype.find = function(data) {
+  var current = this.head;
+
+  while (current) {
+    if (current.data === data) {
+      return current;
+    }
+
+    current = current.next;
+  }
+
+  return 'No entires have been found';
 };
 
 SinglyLinkedList.prototype.mutateEach = function(fn) {
@@ -124,15 +138,15 @@ newList.remove(1);
 newList.print(); // [-1]--->[3]--->[9]
 newList.length(); // 3
 
-newList.insertAfter(7, 3);
+newList.insert(7, 3);
 newList.print(); // [-1]--->[3]--->[7]--->[9]
 newList.length(); // 4
 
-newList.insertAfter(1, 9);
+newList.insert(1, 9);
 newList.print(); // [-1]--->[3]--->[7]--->[9]--->[1]
 newList.length(); // 5
 
-newList.insertAfter(4, -1);
+newList.insert(4, -1);
 newList.print(); // [-1]--->[4]--->[3]--->[7]--->[9]--->[1]
 newList.length(); // 6
 
@@ -142,3 +156,8 @@ newList.mutateEach(function(node) {
 
 newList.print(); // [-2]--->[8]--->[6]--->[14]--->[18]--->[2]
 newList.length(); // 6
+
+console.log(newList.find(6));
+// Node {
+//   data: 6,
+//   next: Node { data: 14, next: Node { data: 18, next: [Node] } } }
