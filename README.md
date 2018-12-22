@@ -20,7 +20,7 @@ In this series I will explore several different data structures and algorithms t
 
 #### [Hash Tables](/Hash-Tables/HashTables.md)
 
-### [Algorithms](/Algorithms/Algorithms.md)
+### Algorithms
 
 #### [Bubble Sort](/Algorithms/Algorithms.md#Bubble-Sort)
 
