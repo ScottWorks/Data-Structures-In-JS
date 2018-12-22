@@ -1,14 +1,15 @@
 ## Motivation
 
-In this series I will explore several different data structures that are fundamental to Computer Science. In each section I have provided detailed explanations about each data structure as well as a coding implementation in JavaScript.
+In this series I will explore several different data structures and algorithms that are fundamental to Computer Science. In each section I have provided detailed explanations about each data structure as well as a coding implementation in JavaScript.
 
 ## Table of Contents
 
-#### TBD - [Arrays](/Arrays/Arrays.md)
+### Data Structures
+
+#### [Arrays](/Arrays/Arrays.md)
 
 #### [Linked Lists](/Linked-Lists/LinkedLists.md)
 
-- Add more features to SignlyLinkList prototype
 - Add DoubleLinkedList constructor function and prototype methods
 - Discuss Circular Linked Lists
 
@@ -19,4 +20,14 @@ In this series I will explore several different data structures that are fundame
 
 #### [Hash Tables](/Hash-Tables/HashTables.md)
 
-#### TBD - [Projects](/Projects/Projects.md)
+### [Algorithms](/Algorithms/Algorithms.md)
+
+#### Bubble Sort
+
+#### Quick Sort
+
+#### Merge Sort
+
+#### Binary Search
+
+### [Projects](/Projects/Projects.md)
