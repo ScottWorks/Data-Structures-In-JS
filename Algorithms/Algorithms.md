@@ -167,4 +167,6 @@ mergeSort([7, 4, 1, 6, 7, 1, 4, 7, 5, 2]);
 ## References
 
 - [Four Semester of CS in 6 Hours](http://btholt.github.io/four-semesters-of-cs/)
+- [Bubble Sort - Wikipedia](https://en.wikipedia.org/wiki/Bubble_sort)
 - [Quick Sort - Wikipedia](https://en.wikipedia.org/wiki/Quicksort)
+- [Merge Sort](https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial)
