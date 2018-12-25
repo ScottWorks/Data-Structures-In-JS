@@ -118,12 +118,14 @@ quickSort([1, 6, 7, 1, 3, 4, 6, 1]);
 
 ### Merge Sort
 
-Out of the three sorting algorithms discussed here Merge Sort is the most efficient with an average and worst case of O(nlog(n)) comparisons for n items. We can implement this technique following the steps below:
+Out of the three sorting algorithms discussed here Merge Sort is the most efficient with an average and worst case of O(nlog(n)) comparisons for n items. We can implement this algorithm following the steps below:
 
 1. Divide the list into `n` subsets until each subset contains one element.
 2. Recursively merge subsets to produce a new sorted list a single list remains.
 
 #### Visualization
+
+Take an array of numbers " 6 5 3 1 8 7 2 4", and sort the array from lowest number to greatest number using merge sort.
 
 ![fig3](/Algorithms/images/fig3.gif)
 
@@ -131,10 +133,12 @@ Out of the three sorting algorithms discussed here Merge Sort is the most effici
 
 ```js
 function mergeSort(arr) {
-  if (arr.length < 2) {
+  const length = arr.length;
+
+  if (length < 2) {
     return arr;
   }
-  const length = arr.length;
+
   const middle = Math.floor(length / 2);
   const left = arr.slice(0, middle);
   const right = arr.slice(middle);
@@ -164,9 +168,43 @@ mergeSort([7, 4, 1, 6, 7, 1, 4, 7, 5, 2]);
 
 ### Binary Search
 
+Binary search is a search algorithm that requires an average and worst case of O(log(n)) comparisons. Although it is a simple algorithm it can only be used on lists that are pre-sorted. Further complexity arises when considering elements an exit condition and midpoint calculations when the value is not a whole number. We can implement this algorithm following the steps below:
+
+1. Compare the target value to the middle element.
+2. If they are not equal, split the array, then remove the half that cannot include the target.
+3. Repeat steps 1-2 until the target value is found or return false.
+
+#### Visualization
+
+Take an array of numbers " 0 4 7 10 14 23 45 47 53", and determine whether it contains the number 47 (return Boolean).
+
+![fig4](/Algorithms/images/fig4.gif)
+
+#### Implementation
+
+```js
+function binarySeach(arr, target) {
+  const length = arr.length;
+  const middle = Math.floor(length / 2);
+
+  if (length <= 1 && arr[middle] !== target) return false;
+  else if (target < arr[middle])
+    return binarySeach(arr.slice(0, middle), target);
+  else if (target > arr[middle]) return binarySeach(arr.slice(middle), target);
+  else return true;
+}
+
+binarySeach([0, 4, 7, 10, 14, 23, 45, 47, 53], 4);
+// true
+
+binarySeach([0, 4, 7, 10, 14, 23, 45, 47, 53], 24);
+// false
+```
+
 ## References
 
 - [Four Semester of CS in 6 Hours](http://btholt.github.io/four-semesters-of-cs/)
 - [Bubble Sort - Wikipedia](https://en.wikipedia.org/wiki/Bubble_sort)
 - [Quick Sort - Wikipedia](https://en.wikipedia.org/wiki/Quicksort)
 - [Merge Sort](https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial)
+- [Binary Search Algorithm - Wikipedia](https://en.wikipedia.org/wiki/Binary_search_algorithm)
