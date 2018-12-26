@@ -7,209 +7,238 @@
   - search by artists/ album/ year
 */
 
-function PlaylistAudioFile(data){
-  this.next = null
-  this.prev = null
-  this.data = data
+function PlaylistAudioFile(data) {
+  this.next = null;
+  this.prev = null;
+  this.data = data;
 }
 
-function Playlist(){
+function Playlist() {
   this.head = null;
   this.tail = null;
 
   this.stopped = true;
-  this.currentAudioFile = null
+  this.currentAudioFile = null;
   this.length = 0;
 }
 
-Playlist.prototype.getInfo = function(index){
+Playlist.prototype.getInfo = function(index) {
   var current = this.head;
 
-  while(current){
-    if(current.data.index === index){
-      return current
+  while (current) {
+    if (current.data.index === index) {
+      return current;
     }
-    current = current.next
-  } 
-}
+    current = current.next;
+  }
+};
 
-Playlist.prototype.add = function(data){
-  var newAudioFile = new PlaylistAudioFile(data)
+Playlist.prototype.add = function(data) {
+  var newAudioFile = new PlaylistAudioFile(data);
 
   this.length++;
 
-  if(!this.head){
-    newAudioFile.data.index = 0
-    this.head = newAudioFile
-    this.tail = newAudioFile
+  if (!this.head) {
+    newAudioFile.data.index = 0;
+    this.head = newAudioFile;
+    this.tail = newAudioFile;
   } else {
     newAudioFile.data.index = this.length - 1;
 
-    this.tail.next = newAudioFile
-    newAudioFile.prev = this.tail
-    this.tail = newAudioFile
+    this.tail.next = newAudioFile;
+    newAudioFile.prev = this.tail;
+    this.tail = newAudioFile;
   }
-}
+};
 
-Playlist.prototype.remove = function(index){
-  var current = this.head;
+Playlist.prototype.remove = function(index) {
+  var current = this.head,
+    previous = this.head;
 
-  while(current){ 
-    if(current.data.index === index) {
-      if(current === this.head){
-        this.head = this.head.next
-      } else if(current === this.tail){
-          this.tail = this.tail.prev
+  while (current) {
+    if (current.data.index === index) {
+      if (current === this.head && current === this.tail) {
+        this.head = null;
+        this.tail = null;
+      } else if (current === this.head) {
+        this.head = this.head.next;
+        this.head.prev = null;
+      } else if (current === this.tail) {
+        this.tail = previous;
       } else {
-          current.prev.next = current.next
-      } 
-    } else if(current.data.index > index) {
-        current.data.index--
+        previous.next = current.next;
+      }
+
+      this.length--;
+    } else if (current.data.index > index) {
+      current.data.index--;
+    } else {
+      previous = current;
     }
 
-    current = current.next
+    current = current.next;
+  }
+};
+
+Playlist.prototype.play = function() {
+  this.stopped = !this.stopped;
+
+  if (!this.currentAudioFile) {
+    this.currentAudioFile = this.head;
+  }
+};
+
+Playlist.prototype.stop = function() {
+  this.stopped = true;
+  this.currentAudioFile = null;
+};
+
+Playlist.prototype.skipBackward = function() {
+  if (!this.currentAudioFile.prev) {
+    return false;
   }
 
-  this.length--;
-}
+  this.currentAudioFile = this.currentAudioFile.prev;
+};
 
-Playlist.prototype.play = function(){
-  this.stopped = !this.stopped   
-
-  if(!this.currentAudioFile){
-    this.currentAudioFile = this.head
-  }
-}
-
-Playlist.prototype.stop = function(){
-  this.stopped = true   
-  this.currentAudioFile = null
-}
-
-Playlist.prototype.skipBackward = function(){
-  if(!this.currentAudioFile.prev){
-    return false
+Playlist.prototype.skipForward = function() {
+  if (!this.currentAudioFile.next) {
+    return false;
   }
 
-  this.currentAudioFile = this.currentAudioFile.prev
-}
+  this.currentAudioFile = this.currentAudioFile.next;
+};
 
-Playlist.prototype.skipForward = function(){
-  if(!this.currentAudioFile.next){
-    return false
+Playlist.prototype.sortBy = function(type) {
+  var left = new Playlist(),
+    right = new Playlist(),
+    current = this.head;
+
+  const length = this.length;
+
+  if (length === 1) {
+    return this;
   }
 
-  this.currentAudioFile = this.currentAudioFile.next  
-}
+  while (current) {
+    if (current.data) {
+      if (current.data.index < Math.floor(length / 2)) {
+        left.add(current.data);
+      } else {
+        right.add(current.data);
+      }
+    }
 
-Playlist.prototype.sortBy = function(type){
-  // initialize left/ right linked lists
-  var current = this.head
-
-  // if this.length < 2, return this
-
-  while(current){
-    // if current.index <= this.length / 2
-      // insert current into left side LL
-    // else if current.index > this.length / 2
-      // insert current into right side LL
-    current = current.next
+    current = current.next;
   }
 
-  // return _merge(leftLL.sortBy(type), rightLL.sortBy(type))
-}
+  return this._merge(left.sortBy(type), right.sortBy(type), type);
+};
 
-Playlist.prototype._merge = function(leftSide, rightSide){
-  // initialize resultsLL 
-  // while leftside and rightSide length > 1
-    // if leftSide.data.index <= rightSide.data.index
-      // insert leftSide into resultsLL
-    // else 
-      // insert rightSide into resultsLL
-  // return resultsLL
-}
+Playlist.prototype._merge = function(left, right, type) {
+  var result = new Playlist(),
+    currentLeft = left.head,
+    currentRight = right.head;
 
-Playlist.prototype.search = function(query){
-  
-}
+  while (currentLeft && currentRight) {
+    if (currentLeft.data[type] <= currentRight.data[type]) {
+      result.add(currentLeft.data);
+      currentLeft = currentLeft.next;
+    } else {
+      result.add(currentRight.data);
+      currentRight = currentRight.next;
+    }
+  }
 
-Playlist.prototype.print = function(){
-  var current = this.head, 
+  if (currentLeft) result.add(currentLeft.data);
+  if (currentRight) result.add(currentRight.data);
+
+  return result;
+};
+
+Playlist.prototype.search = function(query) {};
+
+Playlist.prototype.print = function() {
+  var current = this.head,
     result = '';
 
-  while(current){
-    if(current === this.head){
-      result += `${current.data.index} - [${current.data.title} by ${current.data.artist}]`
+  while (current) {
+    if (current === this.head) {
+      result += `${current.data.index} - [${current.data.title} by ${
+        current.data.artist
+      }]`;
     } else {
-      result += `\n |\n |\n v\n${current.data.index} - [${current.data.title} by ${current.data.artist}]`
+      result += `\n |\n |\n v\n${current.data.index} - [${
+        current.data.title
+      } by ${current.data.artist}]`;
     }
 
-    current = current.next
+    current = current.next;
   }
 
-  return result
-}
+  return result;
+};
 
-var hiphopPlaylist = new Playlist()
+var hiphopPlaylist = new Playlist();
 
 hiphopPlaylist.add({
-    index: null,
-    artist: 'Wu-Tang Clan',
-    album: 'Enter the 36 Chambers' ,
-    title: 'C.R.E.A.M',
-    genre: 'Hip-Hop',
-    rating: 5,
-    length: '4:01'
-  })
+  index: null,
+  artist: 'Wu-Tang Clan',
+  album: 'Enter the 36 Chambers',
+  title: 'C.R.E.A.M',
+  genre: 'Hip-Hop',
+  rating: 5,
+  length: '4:01'
+});
 
 hiphopPlaylist.add({
   index: null,
   artist: 'Nas',
-  album: 'Illmatic' ,
+  album: 'Illmatic',
   title: 'The World Is Yours',
   genre: 'Hip-Hop',
   rating: 5,
   length: '4:08'
-})
+});
 
 hiphopPlaylist.add({
   index: null,
   artist: 'Naughty By Nature',
-  album: '19 Naughty III' ,
+  album: '19 Naughty III',
   title: 'Hip Hop Hooray',
   genre: 'Hip-Hop',
   rating: 5,
   length: '4:33'
-})
+});
 
 hiphopPlaylist.add({
   index: null,
   artist: 'Digable Planets',
-  album: 'Reachin (A New Refutation of Time and Space)' ,
+  album: 'Reachin (A New Refutation of Time and Space)',
   title: 'Rebirth of Slick (Cool Like Dat)',
   genre: 'Hip-Hop',
   rating: 5,
   length: '4:20'
-})
+});
 
 hiphopPlaylist.add({
   index: null,
   artist: 'A Tribe Called Quest',
-  album: 'The Low End Theory' ,
+  album: 'The Low End Theory',
   title: 'Scenario',
   genre: 'Hip-Hop',
   rating: 5,
   length: '4:24'
-})
+});
 
-console.log(hiphopPlaylist)
+console.log(hiphopPlaylist);
 
 // Playlist {
-//   head: 
+//   head:
 //    PlaylistAudioFile {
 //      next: PlaylistAudioFile { next: [PlaylistAudioFile], prev: [Circular], data: [Object] },
 //      prev: null,
-//      data: 
+//      data:
 //       { index: 0,
 //         artist: 'Wu-Tang Clan',
 //         album: 'Enter the 36 Chambers',
@@ -217,11 +246,11 @@ console.log(hiphopPlaylist)
 //         genre: 'Hip-Hop',
 //         rating: 5,
 //         length: '4:01' } },
-//   tail: 
+//   tail:
 //    PlaylistAudioFile {
 //      next: null,
 //      prev: PlaylistAudioFile { next: [Circular], prev: [PlaylistAudioFile], data: [Object] },
-//      data: 
+//      data:
 //       { index: 4,
 //         artist: 'A Tribe Called Quest',
 //         album: 'The Low End Theory',
@@ -233,25 +262,25 @@ console.log(hiphopPlaylist)
 //   currentAudioFile: null,
 //   length: 5 }
 
-hiphopPlaylist.remove(2)
+hiphopPlaylist.remove(2);
 // console.log(hiphopPlaylist.print())
 
-hiphopPlaylist.play()
+hiphopPlaylist.play();
 // console.log(hiphopPlaylist.currentAudioFile, hiphopPlaylist.stopped)
 
-hiphopPlaylist.play()
+hiphopPlaylist.play();
 // console.log(hiphopPlaylist.currentAudioFile, hiphopPlaylist.stopped)
 
-hiphopPlaylist.stop()
+hiphopPlaylist.stop();
 // console.log(hiphopPlaylist.currentAudioFile, hiphopPlaylist.stopped)
 
-hiphopPlaylist.play()
+hiphopPlaylist.play();
 // console.log(hiphopPlaylist.currentAudioFile)
 
-hiphopPlaylist.skipBackward()
+hiphopPlaylist.skipBackward();
 // console.log(hiphopPlaylist.currentAudioFile)
 
-hiphopPlaylist.skipForward()
+hiphopPlaylist.skipForward();
 // console.log(hiphopPlaylist.currentAudioFile)
 
 // console.log(hiphopPlaylist.getInfo(1))
