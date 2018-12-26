@@ -25,3 +25,5 @@ In this series I will explore several different data structures and algorithms t
 #### [Binary Search](/Algorithms/Algorithms.md#Binary-Search)
 
 ### [Projects](/Projects/Projects.md)
+
+#### [MP3 Player](/Projects/MP3Player.js)
