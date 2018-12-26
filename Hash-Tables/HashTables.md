@@ -239,4 +239,4 @@ console.log(newHashTable.printTable());
 ## References
 
 - [Basics of Hash Tables](https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/tutorial/)
-- [About the #data-structures series](http://blog.benoitvallon.com/data-structures-in-javascript/the-hash-table-data-structure/)
+- [Data-Structures Series](http://blog.benoitvallon.com/data-structures-in-javascript/the-hash-table-data-structure/)
