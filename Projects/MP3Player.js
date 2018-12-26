@@ -156,7 +156,25 @@ Playlist.prototype._merge = function(left, right, type) {
   return result;
 };
 
-Playlist.prototype.search = function(query) {};
+Playlist.prototype.search = function(query) {
+  var current = this.head,
+    result = new Playlist();
+
+  while (current) {
+    console.log(current.data);
+    if (
+      current.data.artist.includes(query) ||
+      current.data.album.includes(query) ||
+      current.data.title.includes(query)
+    ) {
+      result.add(current.data);
+    }
+
+    current = current.next;
+  }
+
+  return result;
+};
 
 Playlist.prototype.print = function() {
   var current = this.head,
@@ -178,7 +196,6 @@ Playlist.prototype.print = function() {
 
   return result;
 };
-
 var hiphopPlaylist = new Playlist();
 
 hiphopPlaylist.add({
@@ -233,35 +250,6 @@ hiphopPlaylist.add({
 
 console.log(hiphopPlaylist);
 
-// Playlist {
-//   head:
-//    PlaylistAudioFile {
-//      next: PlaylistAudioFile { next: [PlaylistAudioFile], prev: [Circular], data: [Object] },
-//      prev: null,
-//      data:
-//       { index: 0,
-//         artist: 'Wu-Tang Clan',
-//         album: 'Enter the 36 Chambers',
-//         title: 'C.R.E.A.M',
-//         genre: 'Hip-Hop',
-//         rating: 5,
-//         length: '4:01' } },
-//   tail:
-//    PlaylistAudioFile {
-//      next: null,
-//      prev: PlaylistAudioFile { next: [Circular], prev: [PlaylistAudioFile], data: [Object] },
-//      data:
-//       { index: 4,
-//         artist: 'A Tribe Called Quest',
-//         album: 'The Low End Theory',
-//         title: 'Scenario',
-//         genre: 'Hip-Hop',
-//         rating: 5,
-//         length: '4:24' } },
-//   stopped: true,
-//   currentAudioFile: null,
-//   length: 5 }
-
 hiphopPlaylist.remove(2);
 // console.log(hiphopPlaylist.print())
 
@@ -283,4 +271,10 @@ hiphopPlaylist.skipBackward();
 hiphopPlaylist.skipForward();
 // console.log(hiphopPlaylist.currentAudioFile)
 
-// console.log(hiphopPlaylist.getInfo(1))
+console.log(hiphopPlaylist.getInfo(1));
+
+const sorted = hiphopPlaylist.sortBy('artist');
+console.log(sorted.print());
+
+const search = hiphopPlaylist.search('The');
+console.log(search.print());
