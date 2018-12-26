@@ -4,7 +4,7 @@
 
 ### Linked Lists
 
-- MP3 Player: Implement an MP3 player playlist that is capable of play, pause, stop, skip forward/ backward, add/ remove song, shuffle, sort by artists/ album/ year, search by artists/ album/ year, etc.
+- [MP3 Player](/Projects/MP3Player.js): Implement an MP3 player playlist that is capable of play, pause, stop, skip forward/ backward, add/ remove song, shuffle, sort by artists/ album/ year, search by artists/ album/ year, etc.
 
 ### Hash Tables
 

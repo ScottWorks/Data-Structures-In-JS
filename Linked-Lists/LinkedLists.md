@@ -210,7 +210,7 @@ The main difference between a single and double linked list is that the nodes of
 
 ## Use Cases
 
-- Playlist Application where the order of each song is important and traversing (skip back/ forward) is required.
+- [Playlist Application](/Projects/MP3Player.js) where the order of each song is important and traversing (skip back/ forward) is required.
 - Elements in a Hash Table (Open Hashing)
 
 ## References
